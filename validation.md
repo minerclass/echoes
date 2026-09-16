@@ -36,7 +36,7 @@ How the keys were driven matters for reading this. The automation available here
 - This browser reports `prefers-reduced-motion: reduce`, so the low-motion path was the default throughout. The animated path was switched on deliberately and also ran clean, but it had less exposure.
 - WebGL loss was forced through `WEBGL_lose_context`. The render loop stops, open dialogs close, the alert is what remains on screen, and focus moves to the fallback link. The fallback at `archive-v1/index.html` was opened and loaded without console errors.
 - No console errors at any point. The only console output is the upstream Three.js deprecation warning for the non-module build.
-- Every asset reference in `index.html` is relative, so the game will resolve from a subdirectory. This was served from a site root; a deployed subpath has not been exercised.
+- Deployed subpath was exercised. The committed tree was exported with `git archive`, served under `/echoes/` on a plain static server, and played. Every asset resolved: `/echoes/styles.css`, `/echoes/vendor/three.min.js`, `/echoes/world-data.js`, `/echoes/scenery.js`, `/echoes/game.js`, all 200, with no console errors. The WebGL fallback link resolved to `/echoes/archive-v1/index.html` and returned 200. That covers relative-path behaviour under the Pages subpath; the live Pages deployment itself is a separate check.
 
 ## Not verified
 
