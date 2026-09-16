@@ -34,11 +34,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # enablement turns Pages on for this repository on the first run, so a
-      # newly created repo does not need the setting flipped by hand first.
+      # Pages must already be enabled with Source set to GitHub Actions.
+      # configure-pages cannot switch it on itself: the workflow token does not
+      # carry the admin rights that the Pages creation API requires.
       - uses: actions/configure-pages@v6
-        with:
-          enablement: true
 
       # Static files, no build step. Every asset reference in index.html is
       # relative, so the game resolves correctly under the /echoes/ subpath.
