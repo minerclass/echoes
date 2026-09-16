@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+# Matches the workflow used across the other game repositories. It publishes the
+# site as an artifact rather than using the legacy branch-based Pages build,
+# which hung repeatedly on a sibling repository with updated_at never advancing
+# past created_at. A stuck run here is visible and re-runnable from the Actions
+# tab.
+
+on:
+  push:
+    branches: [main]
+  # Lets a stuck or superseded deploy be re-run without an empty commit.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a deploy that is already publishing. A cancelled deploy-pages run
+# can leave the Pages environment mid-update, which is the failure mode this
+# workflow exists to avoid.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      # enablement turns Pages on for this repository on the first run, so a
+      # newly created repo does not need the setting flipped by hand first.
+      - uses: actions/configure-pages@v6
+        with:
+          enablement: true
+
+      # Static files, no build step. Every asset reference in index.html is
+      # relative, so the game resolves correctly under the /echoes/ subpath.
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v5
