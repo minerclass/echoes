@@ -6,6 +6,23 @@ or tokens.
 
 ---
 
+## 2026-09-15 - First publish, and the one setting a workflow cannot set
+
+**Live at https://minerclass.github.io/echoes/ and linked from the games hub.**
+
+**Pages had to be enabled by hand first.** The first two deploys failed at
+`actions/configure-pages`. Adding `enablement: true` does not help: that asks the
+action to call the Pages creation API, which the workflow token has no admin
+rights for. A new repository needs Settings -> Pages -> Source set to GitHub
+Actions once, after which the unmodified sibling workflow succeeds. The workflow
+here now matches the other game repositories step for step.
+
+**Verified after deploy, not assumed from a green check.** The live page and every
+asset returned 200 under the `/echoes/` subpath, the three echo stones were walked
+to 3/3 on the deployed build, and the hub card's play link was followed to a 200.
+
+---
+
 ## 2026-09-15 - Make the game finishable, then make the change visible
 
 **The game could not be completed before this pass.** The walkable surface had a
