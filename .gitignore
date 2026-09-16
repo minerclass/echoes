@@ -1,0 +1,11 @@
+# Local preview and editor noise
+.DS_Store
+Thumbs.db
+*.swp
+
+# Player-saved reflections never belong in the repository
+echoes-reflection.txt
+*.local.*
+
+# Nothing here needs a package manager
+node_modules/

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101b23">
+  <title>Echoes / Five worlds of the word</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game">
+    <canvas id="world" tabindex="0" aria-label="First-person media environment. Use WASD to move, arrows to turn, and Space to pulse a node. Guided mode provides the same learning tasks without movement.">Your browser needs Canvas support for the first-person view. Guided mode offers all the learning tasks.</canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="hud">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">E/</span><div>ECHOES<small>FIVE WORLDS OF THE WORD</small></div></div>
+      <div class="hud-actions"><button id="sound" aria-pressed="false">Sound off</button><button id="notes-button">Field notes</button><button id="pause-button">Pause</button></div>
+    </header>
+    <section class="mission" aria-label="Current mission">
+      <div class="eyebrow" id="stage-count">EXPEDITION / 01 OF 05</div>
+      <h1 id="stage-title">Primary orality</h1>
+      <p id="mission-text"></p>
+      <div id="pips" aria-label="Recovered nodes"></div>
+      <div class="mission-actions"><button id="replay" class="small">Replay refrain</button><button id="ranking" class="small" hidden>Change ranking</button><button id="interpret" class="small" disabled>Make sense · 0/3</button></div>
+    </section>
+    <div id="reticle" aria-hidden="true"><i></i><i></i></div>
+    <div id="target-label" aria-hidden="true"></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <aside class="guide" id="guide" hidden aria-label="Guided controls"><p>Explore the same nodes without moving.</p><div id="guide-nodes"></div><button id="guide-exit" hidden>Enter the open portal</button></aside>
+    <footer class="bottom-hud"><div><span class="tiny-label">PULSE READER</span><strong id="status-line">Find the voices</strong></div><div class="controls-hint">WASD move <b>·</b> ← → turn <b>·</b> Space pulse <b>·</b> Esc pause<br><span>Drag the scene to look, or use Mouse look in Pause.</span></div><button id="guided-toggle" aria-pressed="false">Guided mode</button></footer>
+    <nav class="touch-controls" aria-label="Movement and pulse controls"><button data-hold="ArrowLeft" aria-label="Turn left">↶</button><button data-hold="w" aria-label="Move forward">↑</button><button id="touch-pulse">Pulse</button><button data-hold="s" aria-label="Move backward">↓</button><button data-hold="ArrowRight" aria-label="Turn right">↷</button></nav>
+  </main>
+
+  <dialog id="intro" aria-labelledby="intro-title">
+    <div class="eyebrow">A FIRST-PERSON EXPEDITION · ABOUT 5–8 MINUTES</div>
+    <h2 id="intro-title">The world changes.<br><em>Who makes meaning?</em></h2>
+    <p class="lead">Step into five media environments. Recover voices, inspect traces, disrupt a feed, and challenge a generated answer.</p>
+    <div class="stage-strip"><span>01<small>REMEMBER</small></span><span>02<small>RECORD</small></span><span>03<small>BROADCAST</small></span><span>04<small>RANK</small></span><span>05<small>GENERATE</small></span></div>
+    <p>Explore with <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>, turn with <kbd>←</kbd><kbd>→</kbd> or drag, aim at glowing nodes, and press <kbd>Space</kbd> or click to pulse. Read the traces, make sense of them, then find the portal.</p>
+    <div class="button-row"><button id="start" class="primary">Begin expedition <span>↗</span></button><button id="start-guided">Play without movement</button></div>
+    <p class="fine">Ong’s three modes + Micah Miner’s two proposed extensions. These environments overlap and coexist. The rooms are teaching metaphors, not a universal historical ladder. Optional audio has text equivalents.</p>
+  </dialog>
+
+  <dialog id="briefing" aria-labelledby="brief-title"><div class="eyebrow" id="brief-author"></div><h2 id="brief-title"></h2><p class="lead" id="brief-idea"></p><p id="brief-instruction"></p><button id="enter-room" class="primary">Enter this world ↗</button></dialog>
+  <dialog id="notebook" aria-labelledby="notes-title"><div class="eyebrow">RECOVERED TRACES</div><h2 id="notes-title">Field notes</h2><div id="notes-content"></div><button data-close="notebook">Return to the world</button></dialog>
+  <dialog id="question" aria-labelledby="question-title"><div class="eyebrow">MAKE SENSE OF WHAT YOU FOUND</div><h2 id="question-title"></h2><div id="question-evidence"></div><div id="answers"></div><p id="answer-feedback" role="status" aria-live="polite"></p><button id="return-world">Keep exploring</button></dialog>
+  <dialog id="pause" aria-labelledby="pause-title"><div class="eyebrow">TAKE YOUR TIME</div><h2 id="pause-title">Expedition paused</h2><p>There is no countdown or penalty for rereading. Your place is kept while this page stays open.</p><div class="button-row"><button data-close="pause" class="primary">Resume</button><button id="mouse-look">Mouse look</button><button id="restart">Restart expedition</button></div><label class="check"><input type="checkbox" id="reduce-motion"> Reduce ambient motion</label><p class="fine">Mouse look captures the pointer. Press Esc to release it. Arrow keys, dragging, and guided mode always remain available.</p></dialog>
+  <dialog id="ending" aria-labelledby="end-title"><div class="eyebrow">EXPEDITION COMPLETE / 05 OF 05</div><h2 id="end-title">Keep the work<br><em>of meaning.</em></h2><p class="lead">You followed the shift from remembered speech to algorithmic generation.</p><ol id="end-notes"></ol><div class="reflection"><label for="reflection">What would you keep the learner responsible for when AI helps?</label><textarea id="reflection" rows="3" placeholder="One concrete task, decision, or explanation…"></textarea><small>This optional reflection stays in this page. Nothing is sent or saved automatically.</small></div><p>In Miner’s framework, pedagogical friction protects thinking, articulation, and becoming. Time, access, resources, and policy condition that work. Difficulty is productive only when learners have meaningful access and support.</p><div class="button-row"><button id="play-again" class="primary">Play again</button><button id="download">Save field notes</button></div><details><summary>Concepts and sources</summary><p>Based on Walter Ong’s primary orality, literacy, and secondary orality, and Micah Miner’s proposed algorithmic secondary orality and tertiary algorithmicity. Game completion illustrates distinctions; it is not evidence of durable learning or a dissertation finding.</p><p><a href="https://journal.oraltradition.org/wp-content/uploads/files/articles/2i/24_ong.pdf" target="_blank" rel="noopener">Walter Ong: Orality-Literacy Studies and the Unity of the Human Race</a>. Miner definitions were checked against the local conceptual reference and July 24 proposal text. All bridge records, posts, and AI text are fictional teaching examples; no live AI is used.</p></details></dialog>
+  <script src="world-data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
